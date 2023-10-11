@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Survey Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: rgb(0, 162, 255);
+        }
+
+        h2{
+            font-size: 40px;
+            color: white;
+           
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: white;
+            box-shadow: 5px 1px 10px;
+        }
+
+        .form-group {
+            margin-bottom: 10px;
+        }
+
+        label {
+            display: inline-block;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        input[type="radio"] {
+            margin-right: 5px;
+        }
+        
+
+        .error {
+            color: red;
+        }
+        textarea{
+            height: 20vh;
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        button{
+            background-color: rgb(0, 162, 255) ;
+            width: 25%;
+            height: 8vh;
+            color: white;
+            border: none;
+            font-size: 20px;
+        }
+        .footer {
+            margin-top: 5%;
+            font-size: large;
+            color: #00008B; /* Dark blue color */
+            text-align: center;
+        }
+
+        .footer p{
+            color:white
+        }
+        .footer p,
+        .footer h5 {
+            display: inline; /* Display p and h5 elements inline */
+        }
+    </style>
+</head>
+<body>
+    <h2 style="text-align: center">Customer Survey Form</h2>
+    <div class="container">
+       
+        <form id="surveyForm" action="submit_survey.php" method="post">
+            <div class="form-group">
+                <label for="firstName">Name</label>
+                <input type="text" id="firstName" name="firstName" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+                <p>Is this first time You are using our products and service?</p>
+                <label>
+                    <input type="radio" name="greeting" value="Yes"> Yes
+                </label>
+                <label>
+                    <input type="radio" name="greeting" value="No"> No
+                </label>
+            </div>
+            <div class="form-group">
+                <p>Would you suggestion to your friends and colleague?</p>
+                <label>
+                    <input type="radio" name="farewell" value="Yes"> Yes
+                </label>
+                <label>
+                    <input type="radio" name="farewell" value="No"> No
+                </label>
+            </div>
+            <div class="form-group">
+                <p>How satisfied are you with our company overall?</p>
+                <label>
+                    <input type="radio" name="greeting" value="Satisfied"> Satisfied
+                </label>
+                <label>
+                    <input type="radio" name="greeting" value="Undecided"> Undecided
+                </label>
+                <label>
+                    <input type="radio" name="greeting" value="Unsatisfied"> Unsatisfied
+                </label>
+            </div>
+            <div class="form-group">
+                <label for="comments">Do you have suggestion to improve our service?</label>
+                <textarea  id="comments" name="comments"></textarea>
+            </div>
+            <div class="form-group">
+             <button type="submit" value="Submit"> Submit</button>
+            </div>
+        </form>
+      
+    </div>
+    <div class="footer">
+        <p>@2018 Customer Survey Form. All Rights Reserved | Designed by <h5>W3Layouts</h5></p>
+    </div>
+    <script>
+        // Add JavaScript for form validation if needed
+        const form = document.getElementById('surveyForm');
+        form.addEventListener('submit', function (event) {
+            let valid = true;
+            const firstName = document.getElementById('firstName');
+            const email = document.getElementById('email');
+
+            if (!firstName.value.trim()) {
+                valid = false;
+                document.getElementById('firstNameError').textContent = 'Name is required';
+            }
+
+            if (!email.value.trim()) {
+                valid = false;
+                document.getElementById('emailError').textContent = 'Email is required';
+            }
+
+            if (!valid) {
+                event.preventDefault();
+            }
+        });
+    </script>
+</body>
+</html>
