@@ -6,8 +6,8 @@
         body {
             font-family: Arial, sans-serif;
             background-color: rgb(0, 162, 255);
-        }
 
+        }
         h2{
             font-size: 40px;
             color: white;
@@ -18,7 +18,7 @@
             margin: 0 auto;
             padding: 20px;
             background-color: white;
-            box-shadow: 5px 1px 10px;
+            box-shadow: 5px 5px 10px #888888;
         }
 
         .form-group {
@@ -26,11 +26,13 @@
         }
 
         label {
-            display: inline-block;
+            display: inline;
         }
 
         input[type="text"],
         input[type="email"],
+        input[type="tel"],
+        select,
         textarea {
             width: 100%;
             padding: 10px;
@@ -40,22 +42,71 @@
             box-sizing: border-box;
         }
 
-        input[type="radio"] {
+        input[type="radio"],
+        input[type="checkbox"] {
             margin-right: 5px;
         }
-        
 
         .error {
             color: red;
         }
-        textarea{
-            height: 20vh;
+
+        /* Add custom CSS to make "Name" and "Email" inline */
+        .form-group.inline {
+            display: flex;
+            align-items: center;
+        }
+
+        .form-group.inline input[type="text"],
+        .form-group.inline input[type="email"],
+        .form-group.inline input[type="tel"],
+        .form-group.inline select,
+        .form-group.inline textarea {
+            flex: 1;
+        }
+
+        .footer {
+            margin-top: 3%;
+            font-size: large;
+            color: rgb(8, 8, 44); /* Dark blue color */
+            text-align: center;
+        }
+        .footer p{
+            color:white
+        }
+
+        .footer p,
+        .footer h5 {
+            display: inline; /* Display p and h5 elements inline */
+        }
+
+        /* Popup Styling */
+        .popup {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
             width: 100%;
-            padding: 10px;
-            margin: 5px 0;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            box-sizing: border-box;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 999;
+        }
+
+        .popup-content {
+            background: white;
+            padding: 20px;
+            width: 80%;
+            max-width: 400px;
+            margin: 20px auto;
+            border-radius: 5px;
+            position: relative;
+        }
+
+        .close {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            cursor: pointer;
         }
 
         button{
@@ -66,99 +117,115 @@
             border: none;
             font-size: 20px;
         }
-        .footer {
-            margin-top: 5%;
-            font-size: large;
-            color: #00008B; /* Dark blue color */
-            text-align: center;
-        }
-
-        .footer p{
-            color:white
-        }
-        .footer p,
-        .footer h5 {
-            display: inline; /* Display p and h5 elements inline */
-        }
     </style>
 </head>
 <body>
-    <h2 style="text-align: center">Customer Survey Form</h2>
+    <h2 style="text-align: center">Survey Form</h2>
     <div class="container">
        
-        <form id="surveyForm" action="submit_survey.php" method="post">
-            <div class="form-group">
-                <label for="firstName">Name</label>
+        <form id="surveyForm"  method="post">
+            <div class="form-group ">
+                <label for="firstName">First Name:</label>
                 <input type="text" id="firstName" name="firstName" required>
             </div>
             <div class="form-group">
-                <label for="email">Email</label>
+                <label for="lastName">Last Name:</label>
+                <input type="text" id="lastName" name="lastName" required>
+            </div>
+            <div class="form-group">
+                <label for="dob">Date of Birth:</label>
+                <input type="date" id="dob" name="dob" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email:</label>
                 <input type="email" id="email" name="email" required>
             </div>
-            <div class="form-group">
-                <p>Is this first time You are using our products and service?</p>
-                <label>
-                    <input type="radio" name="greeting" value="Yes"> Yes
-                </label>
-                <label>
-                    <input type="radio" name="greeting" value="No"> No
-                </label>
+            <div class="form-group ">
+                <label for="mobile">Mobile Number:</label>
+                <input type="tel" id="mobile" name="mobile" required>
+            </div>
+            <div class="form-group ">
+                <label for="country">Country:</label>
+                <select id="country" name="country" required>
+                    <option value="">Select Country</option>
+                   
+                </select>
             </div>
             <div class="form-group">
-                <p>Would you suggestion to your friends and colleague?</p>
+                <p>Gender:</p>
                 <label>
-                    <input type="radio" name="farewell" value="Yes"> Yes
+                    <input type="checkbox" name="gender" value="Male"> Male
                 </label>
                 <label>
-                    <input type="radio" name="farewell" value="No"> No
+                    <input type="checkbox" name="gender" value="Female"> Female
                 </label>
             </div>
+          
+            <div class="form-group ">
+                <label for="profession">Profession:</label>
+                <input type="text" id="profession" name="profession" required>
+            </div>
+           
+            
             <div class="form-group">
-                <p>How satisfied are you with our company overall?</p>
-                <label>
-                    <input type="radio" name="greeting" value="Satisfied"> Satisfied
-                </label>
-                <label>
-                    <input type="radio" name="greeting" value="Undecided"> Undecided
-                </label>
-                <label>
-                    <input type="radio" name="greeting" value="Unsatisfied"> Unsatisfied
-                </label>
+                <button type="submit" id="submitBtn">Submit</button>
+
+                <button type="reset" >Reset</button>
+
             </div>
-            <div class="form-group">
-                <label for="comments">Do you have suggestion to improve our service?</label>
-                <textarea  id="comments" name="comments"></textarea>
-            </div>
-            <div class="form-group">
-             <button type="submit" value="Submit"> Submit</button>
-            </div>
+            
         </form>
-      
     </div>
     <div class="footer">
         <p>@2018 Customer Survey Form. All Rights Reserved | Designed by <h5>W3Layouts</h5></p>
     </div>
+    
+    <div class="popup" id="popup">
+        <div class="popup-content">
+            <span class="close" id="closePopup">&times;</span>
+            <h3>Survey Form Submission</h3>
+          
+        </div>
+    </div>
     <script>
-        // Add JavaScript for form validation if needed
-        const form = document.getElementById('surveyForm');
-        form.addEventListener('submit', function (event) {
-            let valid = true;
-            const firstName = document.getElementById('firstName');
-            const email = document.getElementById('email');
+       
+        const popup = document.getElementById('popup');
+        const closePopup = document.getElementById('closePopup');
+        const submitBtn = document.getElementById('submitBtn');
+        const surveyForm = document.getElementById('surveyForm');
 
-            if (!firstName.value.trim()) {
-                valid = false;
-                document.getElementById('firstNameError').textContent = 'Name is required';
+        submitBtn.addEventListener('click', function(event) {
+            event.preventDefault();
+
+         
+            const formData = new FormData(surveyForm);
+            const popupContent = document.querySelector('.popup-content');
+
+           
+            while (popupContent.firstChild) {
+                popupContent.removeChild(popupContent.firstChild);
             }
 
-            if (!email.value.trim()) {
-                valid = false;
-                document.getElementById('emailError').textContent = 'Email is required';
+           
+            for (const [name, value] of formData) {
+                const label = document.createElement('strong');
+                label.textContent = name + ': ';
+
+                const span = document.createElement('span');
+                span.textContent = value;
+
+                popupContent.appendChild(label);
+                popupContent.appendChild(span);
+                popupContent.appendChild(document.createElement('br'));
             }
 
-            if (!valid) {
-                event.preventDefault();
-            }
+            popup.style.display = 'block';
+        });
+
+        closePopup.addEventListener('click', function() {
+           
+            popup.style.display = 'none';
+            surveyForm.reset();
         });
     </script>
 </body>
